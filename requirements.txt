@@ -1,2 +1,2 @@
-requests==1.5.0
+requests==1.5
 BeautifulSoup

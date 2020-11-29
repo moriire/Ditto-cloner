@@ -1,4 +1,4 @@
-import cmap# import Clone
+import cloner
 import pyfiglet
 import click
 import sys
@@ -24,7 +24,7 @@ def generic(url, mission, name=None):
     if not url:
         raise Exception('bad')
     if mission == 1:
-        x=cmap.Clone(url)
+        x=cloner.Clone(url)
         #click.echo(
         click.echo(x.run())
     elif mission == 2:

@@ -18,7 +18,7 @@ setup(
 		packages = find_packages(), 
 		entry_points ={ 
 			'console_scripts': [ 
-				'gecko = gecko.cloner:main'
+				'gecko = gecko.main:cli'
 			] 
 		}, 
 		classifiers =( 

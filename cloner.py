@@ -4,7 +4,7 @@ import urllib
 import os
 import time
 import sys
-from pyfiglet import Figlet
+import pyfiglet
 import click
 from bs4 import BeautifulSoup as BSoup
 url="https://www.fikifaka.com/auth/login"
@@ -30,11 +30,9 @@ class Page:
         self.attributes = dict()
         self.url = url
         try: 
-            self.resp = requests.get(url, headers=headers)#urllib.request.urlopen(url)#
+            self.resp = requests.get(self.url, headers=headers)#urllib.request.urlopen(url)#
         except requests.exceptions.ConnectionError:#ConnectionError:
             print(ICE)
-            #raise InternetConnectionError(ICE)
-        
         
     def __str__(self):
         return self.resp.text# self.resp.read().decode('utf-8')#
@@ -44,11 +42,21 @@ class ParseHTML(Page):
         self.url = url
         self.tag=tag
         self.page = Page(url)
-        self.soup = BSoup(self.page.resp.text, "html.parser")#BSoup(self.page.resp, "html.parser")#
+        #self.soup = BSoup(self.page.resp.text, "html.parser")#BSoup(self.page.resp, "html.parser")#
         try:
-            self.base_tag = self.soup.head.base['href']
-        except TypeError:
-            self.base_tag = ''
+            self.soup = BSoup(self.page.resp.text, "html.parser")
+            #self.base_tag = self.soup.head.base['href']
+            """
+            except TypeError:
+                self.base_tag = ''
+            """
+        except AttributeError:#ConnectionError:
+            print("URL Cannot be loaded")
+            #raise InternetConnectionError(ICE)
+        finally:
+            try: self.base_tag = self.soup.head.base['href']
+            except TypeError: self.base_tag = ''
+            
             
     def __str__(self):
         self.out = self.soup.html#findAll(self.tag)
@@ -118,7 +126,10 @@ class Downloader:
 class TakeOver(ParseHTML, Downloader):
     def __init__(self, url, tag=None, download=False, stats=False):
         self.tag = tag
-        self.parse = ParseHTML(url, self.tag)
+        try:
+            self.parse = ParseHTML(url, self.tag)
+        except AttributeError:
+            print('Nothing to parse')
         self.download = Downloader
         self.urlfrag=urllib.parse.urlsplit(url)
 
@@ -127,13 +138,12 @@ class TakeOver(ParseHTML, Downloader):
         return rsc
 
     def flow(self, param=None):
-        parser = self.parse(param=param)
-        """
-        xxc=[]
-        for i in parser:
-            xxc+=i
-        """
-        links = tuple(map(self.__segment,  parser))
+        try:
+            parser = self.parse(param=param)
+            links = tuple(map(self.__segment,  parser))
+        except AttributeError:
+            links=[]
+            pass
         return links
 
 class Clone(TakeOver, Downloader):
@@ -143,7 +153,7 @@ class Clone(TakeOver, Downloader):
         self.takeover=TakeOver
 
         self.download = Downloader
-        self.dirs=self.download(url).urlfrag.netloc
+        self.dirs=str(self.download(url).urlfrag.netloc)
         try:
             os.makedirs(self.dirs)
             #os.chdir(self.dirs)
@@ -152,15 +162,7 @@ class Clone(TakeOver, Downloader):
                 pass
         finally:
             os.chdir(self.dirs)
-        """
-        try:
-            os.chdir(self.dirs)
-        except Exception:
-            os.makedirs(self.dirs)
-            if os.path.isdir(self.dirs):
-                if os.getcwd()==self.dirs:
-                    os.chdir(self.dirs)
-        """
+        
         
     async def getRsc(self, tag, param):
         f=0
@@ -186,47 +188,3 @@ class Clone(TakeOver, Downloader):
         
     def run(self):
         asyncio.run(self.main())
-
-
-
-@click.group()
-@click.version_option("1.0.0")
-def main():
-     f = Figlet(font='slant')
-     f.renderText('Cmap Cloner')
-     print(f)
-     """A CVE Search and Lookup CLI"""
-     print("Hye")
-     pass
-
-@main.command()
-@click.argument('url', required=False)
-def clone(**kwargs):
-    #f = Figlet(font='slant')
-    #f.renderText('Cmap Cloner')
-    #print(f)
-    #x = Clone(url)
-    click.echo('hello')#x.run())
-    
-
-if __name__ =='__main__':
-    args = sys.argv
-    if "--help" in args or len(args) == 1:
-        f = Figlet(font='slant')
-        f.renderText('Cmap Cloner')
-        print(f)
-    main()
- 
-"""
-class Error(Exception):
-    pass;
-
-
-class InternetConnectionError(Error):
-    pass
-
-
-class ValueTooLargeError(Error):
-    pass
-"""
-

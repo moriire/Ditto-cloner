@@ -25,7 +25,6 @@ def generic(url, mission, name=None):
         raise Exception('bad')
     if mission == 1:
         x=cloner.Clone(url)
-        #click.echo(
         click.echo(x.run())
     elif mission == 2:
     #x=cmap.Clone(url)
@@ -36,10 +35,10 @@ def generic(url, mission, name=None):
 def welcome():
     click.echo('Welcome')
 
-
+"""
 if __name__ == '__main__':
     cli()
-
+"""
 
 
 
@@ -59,8 +58,11 @@ if __name__ == '__main__':
 #@click.help_option("1.0.0")
 #@click.option('--help', default=2, help='Lie you need help')
 def main():
+    args = sys.argv
+    if "--help" in args or len(args) == 1:
+        click.echo('yes')
     f = pyfiglet.figlet_format('Gecko', font='starwars')
-    print(f)
+    click.echo(f)
     #pass
     
 @click.command()

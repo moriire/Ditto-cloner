@@ -18,7 +18,7 @@ setup(
 		packages = find_packages(), 
 		entry_points ={ 
 			'console_scripts': [ 
-				'gfg = vibhu4gfg.gfg:main'
+				'gecko = gecko.cloner:main'
 			] 
 		}, 
 		classifiers =( 

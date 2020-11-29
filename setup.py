@@ -10,7 +10,7 @@ setup(
 		version ='1.0.0', 
 		author ='Mobolaji Abdulsalam', 
 		author_email ='ibraheemabdulsalam@gmail.com', 
-		url ='https://github.com/Vibhu-Agarwal/vibhu4gfg', 
+		url ='https://github.com/moriire/Gecko-cloner', 
 		description ='Gecko Website Cloner/Copier', 
 		long_description = long_description, 
 		long_description_content_type ="text/markdown", 

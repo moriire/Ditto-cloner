@@ -26,7 +26,7 @@ setup(
 			"License :: OSI Approved :: MIT License", 
 			"Operating System :: OS Independent", 
 		), 
-		keywords ='geeksforgeeks gfg article python package vibhu4agarwal', 
+		keywords =long_description, 
 		install_requires = requirements, 
 		zip_safe = False
 ) 

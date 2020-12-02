@@ -7,8 +7,11 @@ import sys
 from pyfiglet import Figlet
 import click
 from bs4 import BeautifulSoup as BSoup
-url="https://www.fikifaka.com/auth/login"
 import random
+
+
+url="https://www.fikifaka.com/auth/login"
+
 
 user_agent_list = [
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.1 Safari/605.1.15',
@@ -45,9 +48,15 @@ class Page:
             print(ICE)
             #raise InternetConnectionError(ICE)
         
-        
+    def __int__(self):
+        return self.resp.status_code
+    
+    def __bool__(self):
+        return self.resp.status_code==200
+    
     def __str__(self):
         return self.resp.text# self.resp.read().decode('utf-8')#
+    
 
 class ParseHTML(Page):
     def __init__(self, url, tag=None):

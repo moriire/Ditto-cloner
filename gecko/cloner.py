@@ -24,6 +24,16 @@ headers = {'User-Agent': user_agent}
 
 
 ICE="""Like you are not connected to the internet."""
+
+def timer(func):
+    def wrapper(*args, **kwargs):
+        start = time.perf_counter()
+        function = func(*args, **kwargs)
+        #function
+        end =  time.perf_counter()
+        return f"{function} downloaded in {end-start} seconds"
+    return wrapper
+
 class Page:
     """Page url response such as status code response text"""
     def __init__(self, url):

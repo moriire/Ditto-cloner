@@ -1,2 +1,4 @@
-requests==1.5
+requests
 BeautifulSoup
+click
+pyfiglet

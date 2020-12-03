@@ -3,10 +3,6 @@ import pyfiglet
 import click
 import sys
 
-
-import click
-
-
 @click.group()
 @click.version_option("1.0.0")
 def cli():

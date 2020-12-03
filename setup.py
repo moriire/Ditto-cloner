@@ -6,8 +6,8 @@ with open('requirements.txt') as f:
 long_description = 'Gecko Website Cloner/Copier'
 
 setup( 
-		name ='gecko', 
-		version ='1.0.0', 
+		name ='ditto', 
+		version ='0.0.1', 
 		author ='Mobolaji Abdulsalam', 
 		author_email ='ibraheemabdulsalam@gmail.com', 
 		url ='https://github.com/moriire/Gecko-cloner', 
@@ -18,7 +18,7 @@ setup(
 		packages = find_packages(), 
 		entry_points ={ 
 			'console_scripts': [ 
-				'gecko = gecko.main:cli'
+				'ditto = ditto.main:cli'
 			] 
 		}, 
 		classifiers =( 

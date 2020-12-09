@@ -1,2 +1,4 @@
-requests==1.5
-BeautifulSoup
+requests>=2.19.1
+beautifulsoup4>=4.6.3
+Click==7.0
+pyfiglet==0.7

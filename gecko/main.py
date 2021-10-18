@@ -13,7 +13,7 @@ def cli():
 
 
 @cli.command(name='gecko')
-@click.option('--url', '-u', prompt="Your Mission" , type=str, help='Enter a valid website address')
+@click.option('--url', '-u', type=str, prompt="URL" , type=str, help='Enter a valid website address')
 @click.option("--mission", '-m', type=int,  prompt="Your Mission", help="Provide your name")
 @click.option("--name", type=str, prompt="Your name", help="Provide your name")
 def generic(url, mission, name=None):

@@ -31,7 +31,7 @@ def generic(url, mission, name=None):
 def welcome():
     click.echo('Welcome')
 
-"""
+#"""
 if __name__ == '__main__':
     cli()
-"""
+#"""

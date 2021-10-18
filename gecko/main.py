@@ -20,7 +20,7 @@ def generic(url, mission, name=None):
     if not url:
         raise Exception('bad')
     if mission == 1:
-        x=cloner.Clone(url)
+        x=cloner.Clone(--url)
         click.echo(x.run())
     elif mission == 2:
     #x=cmap.Clone(url)

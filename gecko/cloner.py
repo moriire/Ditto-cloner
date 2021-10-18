@@ -221,10 +221,10 @@ def main():
 @main.command()
 @click.argument('url', required=False)
 def clone(**kwargs):
-    #f = Figlet(font='slant')
-    #f.renderText('Cmap Cloner')
-    #print(f)
-    #x = Clone(url)
+    f = Figlet(font='slant')
+    f.renderText('Cmap Cloner')
+    print(f)
+    x = Clone(url)
     click.echo('hello')#x.run())
     
 

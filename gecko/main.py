@@ -2,13 +2,15 @@ import cloner
 import pyfiglet
 import click
 import sys
+from datetime import datetime
 
 @click.group()
 @click.version_option("1.0.0")
 def cli():
     f = pyfiglet.figlet_format('Gecko', font='starwars')
     click.echo(f)
-    """GECKO Website Cloner CLI"""
+    print("GECKO Website Cloner CLI")
+    print(f"Mobolaji Abdulsalam - {datetime.now().year}")
     pass
 
 
@@ -20,7 +22,7 @@ def generic(url, mission, name=None):
     if not url:
         raise Exception('bad')
     if mission == 1:
-        x=cloner.Clone(--url)
+        x=cloner.Clone(url)
         click.echo(x.run())
     elif mission == 2:
     #x=cmap.Clone(url)

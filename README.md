@@ -10,21 +10,21 @@ Gecko-Cloner is a perfect command line tool for cloning or copying website.
 You can download the latest tarball by clicking [here] or latest zip by clicking [here]
 
 Preferably you can download gecko by cloning the Git repository:
-```
+```sh
 git clone https://github.com/moriire/gecko.git
 ```
 gecko works out of the box with Python 3.x on any platform.
 ## Usage
-```
+```sh
 python gecko.py gecko --url[url: url of page to download] --loc[loc: Location to download page]
 ```
 For interactive cli option:
-```
+```sh
 python gecko.py gecko
 ```
 or
 For GUI option:
-```
+```sh
 python gecko.py gui
 ```
 ## License

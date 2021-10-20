@@ -7,7 +7,7 @@
 Gecko-Cloner is a perfect command line tool for cloning or copying website.
 
 ## Installation
-You can download the latest tarball by clicking here or latest zip by clicking here
+You can download the latest tarball by clicking [here] or latest zip by clicking [here]
 
 Preferably you can download gecko by cloning the Git repository:
 ```

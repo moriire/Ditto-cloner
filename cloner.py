@@ -233,7 +233,10 @@ def cli():
     click.echo(click.style(f, fg=color, blink=True, bold=True))
     print(f"Mobolaji Abdulsalam - {datetime.now().year}")
     help_text ="""
-    syntax: python cloner.py gecko --url[url] --loc[loc::optional]\n\t or \n\t python cloner.py gecko \n\t or \n\t python cloner.py gui \n NB:\t if loc is omitted, loc will default to current working directory.       
+    syntax: python cloner.py gecko --url[url] --loc[loc::optional]\n\t or \n\t python cloner.py gecko \n\t or \n\t python cloner.py gui \n\t
+    URL => URL to be downloaded \n\t
+    loc => Directory to save downloaded page.
+    if loc is omitted, loc will default to current working directory.       
     """
     click.echo(click.style(help_text, fg="green", blink=True, bold=True))
     

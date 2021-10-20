@@ -11,7 +11,7 @@ You can download the latest tarball by clicking here or latest zip by clicking h
 
 Preferably you can download gecko by cloning the Git repository:
 ```
-git clone https://github.com/moriire/Gecko.git
+git clone https://github.com/moriire/gecko.git
 ```
 gecko works out of the box with Python 3.x on any platform.
 ## Usage

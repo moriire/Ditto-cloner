@@ -231,16 +231,16 @@ def cli():
     color = random.choice(['red','green', 'yellow','blue'])
     f = pyfiglet.figlet_format('Gecko', font=font)
     click.echo(click.style(f, fg=color, blink=True, bold=True))
-    print(f"Mobolaji Abdulsalam - {datetime.now().year}\n\n")
+    print(f"Mobolaji Abdulsalam - {datetime.now().year}")
     help_text ="""
-    syntax: python cloner.py gecko --url[url] --dirs[dirs]\n\t or \n\t python cloner.py gecko \n\t or \n\t python cloner.py gecko \n\t or \n\t       
+    syntax: python cloner.py gecko --url[url] --loc[loc::optional]\n\t or \n\t python cloner.py gecko \n\t or \n\t python cloner.py gui \n\t or \n\t        
     """
-    click.echo(click.style(help_text, fg=color, blink=True, bold=True))
+    click.echo(click.style(help_text, fg="green", blink=True, bold=True))
     
 @cli.command(name='gecko')
-@click.option('--url', '-u', type=str, required=True, prompt="URL" , help='Enter a valid website address')
-@click.option("--dirs", type=str, prompt="Your name", help="Save location", default = "./")
-def comm(url, mission, dirs):
+@click.option('--url', '-u', type=str, required=True, prompt="Enter URL" , help='Enter a valid website address')
+@click.option("--loc", type=str, prompt="Where did you want to save this project?", help="Save location", default = "./")
+def comm(url, loc):
     if not url:
         raise Exception('bad')
     x=cloner.Clone(url)

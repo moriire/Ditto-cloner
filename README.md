@@ -6,18 +6,6 @@
 
 Gecko-Cloner is a perfect command line tool for cloning or copying website.
 
-
-
-Overview
-Python alternative to numpy package.
-
-## Features:
-Light weight
-fast
-Limited to simple matrix/vector operations.
-Requirements
-Python 3+
-
 ## Installation
 You can download the latest tarball by clicking here or latest zip by clicking here
 

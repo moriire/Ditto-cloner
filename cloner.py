@@ -231,7 +231,7 @@ def cli():
     color = random.choice(['red','green', 'yellow','blue'])
     f = pyfiglet.figlet_format('Gecko', font=font)
     click.echo(click.style(f, fg=color, blink=True, bold=True))
-    print(f"Mobolaji Abdulsalam - {datetime.now().year}")
+    click.echo(click.style(f"Mobolaji Abdulsalam - {datetime.now().year}",  fg="blue")
     help_text ="""
     syntax: python cloner.py gecko --url[url] --loc[loc::optional]\n\t or \n\t python cloner.py gecko \n\t or \n\t python cloner.py gui \n\t
     URL => URL to be downloaded \n\t

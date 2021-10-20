@@ -232,8 +232,10 @@ def cli():
     f = pyfiglet.figlet_format('Gecko', font=font)
     click.echo(click.style(f, fg=color, blink=True, bold=True))
     print(f"Mobolaji Abdulsalam - {datetime.now().year}\n\n")
-    #print("1. Continue")
-    #print("2. GUI")
+    help_text ="""
+    syntax: python cloner.py gecko --url[url] --dirs[dirs]\n\t or \n\t python cloner.py gecko \n\t or \n\t python cloner.py gecko \n\t or \n\t       
+    """
+    click.echo(click.style(help_text, fg=color, blink=True, bold=True))
     
 @cli.command(name='gecko')
 @click.option('--url', '-u', type=str, required=True, prompt="URL" , help='Enter a valid website address')
@@ -247,7 +249,6 @@ def comm(url, mission, dirs):
 @cli.command(name='gui')
 def wall():
     return gui()
-#"""
+
 if __name__ == '__main__':
     cli()
-#"""

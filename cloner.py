@@ -227,7 +227,7 @@ def gui():
 @click.group()
 @click.version_option("1.0.0")
 def cli():
-    font = random.choice(['dotmatrix','doom', 'coinstak', 'starwars', 'block'][:-2])
+    font = random.choice([starwars', 'block'])
     color = random.choice(['red','green', 'yellow','blue'])
     f = pyfiglet.figlet_format('Gecko', font=font)
     click.echo(click.style(f, fg=color, blink=True, bold=True))

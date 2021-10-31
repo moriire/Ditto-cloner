@@ -236,18 +236,17 @@ def gui():
 @click.version_option("1.0.0")
 @click.pass_context
 def cli(ctx):
-    font = random.choice(['starwars', 'block'])
+    font = 'starwars'#random.choice(['starwars', 'block'])
     color = random.choice(['red','green', 'yellow','blue'])
     f = pyfiglet.figlet_format('Gecko', font=font)
     click.echo(click.style(f, fg=color, blink=True, bold=True))
     click.echo(click.style(f"Mobolaji Abdulsalam - {datetime.now().year}",  fg="blue"))
     help_text ="""
-    syntax: python cloner.py gecko --url[url] --loc[loc::optional]\n\t or \n\t python cloner.py gecko \n\t or \n\t python cloner.py gui \n\t
+    syntax: python cloner.py gecko --url[url] --loc[loc::optional]\n\t or \n\t python gecko.py \n\t
     URL => URL to be downloaded \n\t
     loc => Directory to save downloaded page.
     if loc is omitted, loc will default to current working directory.       
     """
-    print(ctx.invoked_subcommand, 'calledssss')
     click.echo(click.style(help_text, fg="green", blink=True, bold=True))
     if ctx.invoked_subcommand is None:
         v = click.confirm("GUI?")

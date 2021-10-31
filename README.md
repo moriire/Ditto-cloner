@@ -30,6 +30,7 @@ or
 For GUI option:
 ```sh
 python gecko.py gui
+```
 or y on GUI? prompt
 ![N|Solid](assets/guinter.PNG)
 ```

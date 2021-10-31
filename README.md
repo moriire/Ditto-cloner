@@ -26,8 +26,8 @@ For interactive cli option:
 >> python gecko.py 
 ```
 ![N|Solid](assets/ginter.PNG)
-or
-For GUI option:
+
+### For GUI option:
 
 ```sh
 >> GUI[y/N]? y

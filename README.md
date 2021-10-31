@@ -37,6 +37,6 @@ or
 python gecko.py gui
 ```
 ![N|Solid](assets/guinter.PNG)
-```
+
 ## License
 MIT

@@ -25,13 +25,13 @@ For interactive cli option:
 ```sh
 python gecko.py 
 ```
-[![N|Solid](assets/ginter.PNG)
+![N|Solid](assets/ginter.PNG)
 or
 For GUI option:
 ```sh
 python gecko.py gui
 or y on GUI? prompt
-[![N|Solid](assets/guinter.PNG)
+![N|Solid](assets/guinter.PNG)
 ```
 ## License
 MIT

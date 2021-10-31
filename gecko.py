@@ -210,7 +210,6 @@ def gui():
     [psg.Input(key='loc_str', readonly=True)],
     [psg.Exit(), psg.Submit()],
     ]
-
     win = psg.Window('Gecko Cloner', layout)
     while True:
         clicked, entry = win.read()
@@ -224,9 +223,10 @@ def gui():
             print('Completed')
     #win.close()
     
-@click.group()
+@click.group(invoke_without_command=True)
 @click.version_option("1.0.0")
-def cli():
+@click.pass_context
+def cli(ctx):
     font = random.choice(['starwars', 'block'])
     color = random.choice(['red','green', 'yellow','blue'])
     f = pyfiglet.figlet_format('Gecko', font=font)
@@ -238,18 +238,31 @@ def cli():
     loc => Directory to save downloaded page.
     if loc is omitted, loc will default to current working directory.       
     """
+    print(ctx.invoked_subcommand, 'calledssss')
     click.echo(click.style(help_text, fg="green", blink=True, bold=True))
+    if ctx.invoked_subcommand is None:
+        v = click.confirm("GUI?")
+        if v :
+            ctx.forward(wall)
+        else:
+            url = click.prompt("Enter URL")
+            loc = click.prompt("location for project?[Current working Dir]")
+            ctx.forward(clone, gui = 0, url = url, loc = loc)
     
-@cli.command(name='gecko')
+@cli.command()
+@click.option('--gui', default=0, type=bool)
 @click.option('--url', '-u', type=str, required=True, prompt="Enter URL" , help='Enter a valid website address')
-@click.option("--loc", type=str, prompt="Where did you want to save this project?", help="Save location", default = "./")
-def comm(url, loc):
+@click.option("--loc", type=str, default = "./", prompt="location for project?[Current working Dir]", help="Save location")
+@click.pass_context
+def clone(ctx, gui, url, loc):
+    """
     if not url:
         raise Exception('bad')
-    x=cloner.Clone(url)
+    """
+    x=Clone(url)
     click.echo(x.run())
 
-@cli.command(name='gui')
+@cli.command()
 def wall():
     return gui()
 

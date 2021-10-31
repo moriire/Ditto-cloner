@@ -23,8 +23,9 @@ python gecko.py gecko --url[url: url of page to download] --loc[loc: Location to
 ```
 For interactive cli option:
 ```sh
-python gecko.py gecko
+python gecko.py 
 ```
+[![N|Solid](assets/ginter.PNG)]
 or
 For GUI option:
 ```sh

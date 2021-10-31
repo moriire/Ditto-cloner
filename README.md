@@ -14,24 +14,28 @@ Preferably you can download gecko by cloning the Git repository:
 git clone https://github.com/moriire/gecko.git
 ```
 ```sh
-python setup.py install
+>> python setup.py install
 ```
 gecko works out of the box with Python 3.x on any platform.
 ## Usage
 ```sh
-python gecko.py gecko --url[url: url of page to download] --loc[loc: Location to download page]
+>> python gecko.py gecko --url[url: url of page to download] --loc[loc: Location to download page]
 ```
 For interactive cli option:
 ```sh
-python gecko.py 
+>> python gecko.py 
 ```
 ![N|Solid](assets/ginter.PNG)
 or
 For GUI option:
+
+```sh
+>> GUI[y/N]? y
+```
+or
 ```sh
 python gecko.py gui
 ```
-or y on GUI? prompt
 ![N|Solid](assets/guinter.PNG)
 ```
 ## License

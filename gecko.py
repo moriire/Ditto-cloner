@@ -1,6 +1,6 @@
+#!/usr/bin/env python3
 import sys
 import os 
-#!/usr/bin/env python3
 from datetime import datetime
 import random
 import asyncio

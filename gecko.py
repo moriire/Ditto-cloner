@@ -1,5 +1,6 @@
 import sys
 import os 
+#!/usr/bin/env python3
 from datetime import datetime
 import random
 import asyncio
@@ -9,18 +10,26 @@ import time
 import pyfiglet
 import click
 from bs4 import BeautifulSoup as BSoup
-user_agent_list = [
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.1 Safari/605.1.15',
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:77.0) Gecko/20100101 Firefox/77.0',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:77.0) Gecko/20100101 Firefox/77.0',
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36',
-]
+from collections import OrderedDict
+import configparser
+#config = configparser.ConfigParser()
 
-user_agent = random.choice(user_agent_list)
-#Set the headers 
+class MultiOrderedDict(OrderedDict):
+
+    def __setitem__(self, key, value):
+        if key in self and isinstance(value, list):
+            self[key].extend(value)
+        else:
+            super().__setitem__(key, value)
+
+    @staticmethod
+    def getlist(value):
+        return value.split("\n")#os.linesep)
+config = configparser.ConfigParser(strict=False, empty_lines_in_values=False, dict_type=MultiOrderedDict, converters={"list": MultiOrderedDict.getlist})
+config.read('gecko.ini')
+info = config.getlist('info', 'agents')
+user_agent = random.choice(info)
 headers = {'User-Agent': user_agent}
-
 
 ICE="""Like you are not connected to the internet."""
 

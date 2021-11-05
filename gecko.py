@@ -77,12 +77,22 @@ class ParseHTML(Page):
         self.out = self.html#findAll(self.tag)
         return str(self.out)
 
+    def dload(self, url):
+        dirs = urllib.parse.urlsplit(url)
+        path = dirs.path.rpartition('/')[0]
+        if path.endswith(".html"):
+            path = path
+        else:
+            path = "{}.html".format(path)
+        with open(path, "wb") as f:
+            f.write(self.resp)
+        return path
+
     def clean(self, url):
         dirs = urllib.parse.urlsplit(url)
         path = dirs.path.rpartition('/')[0]
         return path
-
-                
+             
     def gatherLinks(self, tag, param=None):
         links = self.findAll(tag, attrs={param:True})
         dlink = []
@@ -190,6 +200,7 @@ class Clone(TakeOver, Downloader):
 
     async def main(self):
         # Schedule three calls *concurrently*:
+        await dload(self.url)
         await asyncio.gather(
             self.getRsc('img', 'src'),
             self.getRsc('link', 'href'),

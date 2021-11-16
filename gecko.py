@@ -41,16 +41,25 @@ def timer(func):
         return f"{function} downloaded in {end-start} seconds"
     return wrapper
 
+
+
 class Page(BSoup):
     """Page url response such as status code response text"""
     def __init__(self, url):
         self.attributes = dict()
         self.url = url
-        self.dirs = urllib.parse.urlsplit(url)
-        self.path = self.dirs.netloc
+        self.urlsplit = urllib.parse.urlsplit(url)
+        self.dirs =self.urlsplit.netloc
+        self.path = self.urlsplit.path
+        if self.path.endswith(".html"):
+        	self.path = self.path
+        elif self.path == '' or self.path=="/":
+        	self.path = "index.html"
+        else:
+            self.path = "{}.html".format(self.path)
         try: 
-            self.resp = requests.get(url, headers=headers)#urllib.request.urlopen(url)#
-            super().__init__(self.resp.text,  "html.parser")
+            self.resp = requests.get(url, allow_redirects=True).content# headers=headers)#urllib.request.urlopen(url)#
+            super().__init__(self.resp,  "html.parser")
         except requests.exceptions.ConnectionError:#ConnectionError:
             print(ICE)
             #raise InternetConnectionError(ICE)
@@ -62,7 +71,7 @@ class Page(BSoup):
         return self.resp.status_code==200
     
     def __str__(self):
-        return self.resp.text# self.resp.read().decode('utf-8')#
+        return self.resp.decode("utf-8")# self.resp.read().decode('utf-8')#
     
 
 class ParseHTML(Page):
@@ -74,21 +83,12 @@ class ParseHTML(Page):
         except TypeError:
             self.base_tag = ''
             
-    def __str__(self):
-        self.out = self.__str__()
-        return self.out
+    def __bytes__(self):
+        return self
 
     def dload(self, url):
-        if self.path.endswith(".html"):
-            self.path = self.path
-        else:
-            self.path = "{}.html".format(self.path)
         with open(self.path, "wb") as f:
             f.write(self.resp)
-        return self.path
-
-    @staticmethod
-    def clean(url):
         return self.path
              
     def gatherLinks(self, tag, param=None):
@@ -100,8 +100,7 @@ class ParseHTML(Page):
             if self.base_tag:
                 cdn = self.base_tag.lstrip('/')+linker     
             dlink.append(cdn)
-        #folderpath=map(self.clean, dlink)
-        return dlink#, list(folderpath)
+        return dlink
 
     def __call__(self, param=None):
        tagsLinks = {'link':'href', 'script':'src', 'img':'href'}
@@ -148,15 +147,14 @@ class TakeOver(ParseHTML, Downloader):
     def __init__(self, url, tag=None, download=False, stats=False):
         super().__init__(url, tag)#ParseHTML
         self.tag = tag
-        self.parse = super().__init__(url)
-        self.urlfrag=self.path
+        self.urlfrag=self.dirs
 
     def __segment(self, cpath):
         rsc = ('/').join(('https:/',self.urlfrag.netloc, cpath))
         return rsc
 
     def flow(self, param=None):
-        parser = self.parse(param=param)
+        parser = self(param=param)
         """
         xxc=[]
         for i in parser:
@@ -192,7 +190,7 @@ class Clone(TakeOver):
 
     async def main(self):
         # Schedule three calls *concurrently*:
-        await Download(self.url)
+        #await Download(self.url)
         await asyncio.gather(
             self.getRsc('img', 'src'),
             self.getRsc('link', 'href'),

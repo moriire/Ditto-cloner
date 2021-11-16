@@ -196,7 +196,7 @@ class Clone(TakeOver, Downloader):
 
     async def main(self):
         # Schedule three calls *concurrently*:
-        await dload(self.url)
+        await Download(self.url)
         await asyncio.gather(
             self.getRsc('img', 'src'),
             self.getRsc('link', 'href'),

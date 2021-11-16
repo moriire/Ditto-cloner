@@ -67,7 +67,6 @@ class Page(BSoup):
 
 class ParseHTML(Page):
     def __init__(self, url, tag=None):
-        #self.url = url
         self.tag=tag
         super().__init__(url)
         try:
@@ -76,8 +75,8 @@ class ParseHTML(Page):
             self.base_tag = ''
             
     def __str__(self):
-        self.out = self.html#findAll(self.tag)
-        return str(self.out)
+        self.out = self.__str__()
+        return self.out
 
     def dload(self, url):
         if self.path.endswith(".html"):
@@ -88,7 +87,8 @@ class ParseHTML(Page):
             f.write(self.resp)
         return self.path
 
-    def clean(self, url):
+    @staticmethod
+    def clean(url):
         return self.path
              
     def gatherLinks(self, tag, param=None):

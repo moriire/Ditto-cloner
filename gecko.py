@@ -165,7 +165,7 @@ class TakeOver(Downloader):
         links = tuple(map(self.__segment,  parser))
         return links
 
-class Clone(TakeOver, Downloader):
+class Clone(TakeOver):
     def __init__(self, url, loc=None, rename=None):
         self.url = url
         self.rename = rename

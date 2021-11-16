@@ -144,7 +144,7 @@ class Downloader:
         return True
 
 
-class TakeOver(Downloader):
+class TakeOver(ParseHTML, Downloader):
     def __init__(self, url, tag=None, download=False, stats=False):
         super().__init__(url, tag)#ParseHTML
         self.tag = tag

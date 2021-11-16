@@ -149,7 +149,7 @@ class TakeOver(ParseHTML, Downloader):
         super().__init__(url, tag)#ParseHTML
         self.tag = tag
         self.parse = super().__init__(url)
-        self.urlfrag=self.dirs
+        self.urlfrag=self.path
 
     def __segment(self, cpath):
         rsc = ('/').join(('https:/',self.urlfrag.netloc, cpath))

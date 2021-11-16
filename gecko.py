@@ -167,12 +167,8 @@ class TakeOver(Downloader):
 
 class Clone(TakeOver):
     def __init__(self, url, loc=None, rename=None):
-        self.url = url
+        super().__init__(url)
         self.rename = rename
-        self.takeover=TakeOver
-
-        self.download = Downloader
-        self.dirs=self.download(url).urlfrag.netloc
         try:
             os.makedirs(self.dirs)
         except FileExistsError:

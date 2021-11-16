@@ -47,7 +47,7 @@ class Page(BSoup):
         self.attributes = dict()
         self.url = url
         self.dirs = urllib.parse.urlsplit(url)
-        self.path = dirs.netloc
+        self.path = self.dirs.netloc
         try: 
             self.resp = requests.get(url, headers=headers)#urllib.request.urlopen(url)#
             super().__init__(self.resp.text,  "html.parser")

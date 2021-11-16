@@ -122,8 +122,7 @@ class Downloader:
                 self.urlfrag.path
                 )
         self.location = os.path.join(
-                self.urlfrag.netloc,
-                self.urlfrag.path
+                self.urlfrag
                 )
         
     def folder(self):

@@ -144,13 +144,12 @@ class Downloader:
         return True
 
 
-class TakeOver(ParseHTML, Downloader):
+class TakeOver(Downloader):
     def __init__(self, url, tag=None, download=False, stats=False):
         super().__init__(url, tag)#ParseHTML
         self.tag = tag
-        self.parse = ParseHTML(url, self.tag)
-        self.download = Downloader
-        self.urlfrag=urllib.parse.urlsplit(url)
+        self.parse = super().__init__(url)
+        self.urlfrag=self.dirs
 
     def __segment(self, cpath):
         rsc = ('/').join(('https:/',self.urlfrag.netloc, cpath))

@@ -47,7 +47,7 @@ class Page(BSoup):
         self.attributes = dict()
         self.url = url
         self.dirs = urllib.parse.urlsplit(url)
-        self.path = dirs.path.rpartition('/')[0]
+        self.path = dirs.netloc
         try: 
             self.resp = requests.get(url, headers=headers)#urllib.request.urlopen(url)#
             super().__init__(self.resp.text,  "html.parser")
@@ -80,20 +80,16 @@ class ParseHTML(Page):
         return str(self.out)
 
     def dload(self, url):
-        dirs = urllib.parse.urlsplit(url)
-        path = dirs.path.rpartition('/')[0]
-        if path.endswith(".html"):
-            path = path
+        if self.path.endswith(".html"):
+            self.path = self.path
         else:
-            path = "{}.html".format(path)
-        with open(path, "wb") as f:
+            self.path = "{}.html".format(self.path)
+        with open(self.path, "wb") as f:
             f.write(self.resp)
-        return path
+        return self.path
 
     def clean(self, url):
-        dirs = urllib.parse.urlsplit(url)
-        path = dirs.path.rpartition('/')[0]
-        return path
+        return self.path
              
     def gatherLinks(self, tag, param=None):
         links = self.findAll(tag, attrs={param:True})

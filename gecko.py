@@ -84,12 +84,7 @@ class ParseHTML(Page):
             self.base_tag = ''
             
     def __bytes__(self):
-        return self
-
-    def dload(self, url):
-        with open(self.path, "wb") as f:
-            f.write(self.resp)
-        return self.path
+        return bytes(self.resp)
              
     def gatherLinks(self, tag, param=None):
         links = self.findAll(tag, attrs={param:True})

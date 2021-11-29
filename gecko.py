@@ -178,8 +178,8 @@ class Clone(TakeOver):
 
     async def main(self):
         # Schedule three calls *concurrently*:
-        #await self.dload(self.url)
         await asyncio.gather(
+            self.dload(self.url),
             self.getRsc('img', 'src'),
             self.getRsc('link', 'href'),
             self.getRsc('script', 'src')

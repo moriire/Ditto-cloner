@@ -108,46 +108,39 @@ class ParseHTML(Page):
        if self.tag:
            fpaths = self.gatherLinks(self.tag, param)
        return fpaths
-            
-class Downloader:
-    def __init__(self, link, loc=None):
-        self.link = link
-        self.loc = loc
-        self.urlfrag = urllib.parse.urlsplit(self.link)
-        if self.loc:
-            self.location = os.path.join(
-                self.loc,
-                self.urlfrag.netloc,
-                self.urlfrag.path
-                )
-        self.location = os.path.join(
-                self.urlfrag
-                )
-        
-    def folder(self):
-        x=0
-        dirs=(self.urlfrag.path.lstrip('/')).rpartition('/')[0]#self.location.rpartition('/')[0]
-        try: os.makedirs(dirs)#, exist_ok=True)
-        except Exception:
-            x+=1
-        #continue
-        return True
-    
-    def __call__(self, rename=None):
-        self.folder()
-        filename = self.urlfrag.path.lstrip('/')#[-1]
-        r = requests.get(self.link, allow_redirects=True)
-        with open(filename, 'wb') as fd:
-            for chunk in r.iter_content(chunk_size=128):
-                fd.write(chunk)    
-        return True
-
 
 class TakeOver(ParseHTML, Downloader):
     def __init__(self, url, tag=None, download=False, stats=False):
         super().__init__(url, tag)#ParseHTML
         self.tag = tag
         self.urlfrag=self.dirs
+    
+    @staticmethod
+    def dload(link, loc=None):
+        urlfrag = urllib.parse.urlsplit(link)
+        if loc:
+            location = os.path.join(
+                loc,
+                urlfrag.netloc,
+                urlfrag.path
+                )
+        location = os.path.join(
+                self.urlfrag
+                )
+        x=0
+        dirs=urlfrag.path.lstrip('/')).rpartition('/')[0]#self.location.rpartition('/')[0]
+        try:
+            os.makedirs(dirs)#, exist_ok=True)
+        except Exception:
+            x+=1
+        #continue
+        filename = urlfrag.path.lstrip('/')#[-1]
+        r = requests.get(link, allow_redirects=True)
+        with open(filename, 'wb') as fd:
+            for chunk in r.iter_content(chunk_size=128):
+                fd.write(chunk)    
+        return True
+     
 
     def __segment(self, cpath):
         rsc = ('/').join(('https:/',self.urlfrag.netloc, cpath))

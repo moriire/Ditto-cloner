@@ -109,7 +109,7 @@ class ParseHTML(Page):
            fpaths = self.gatherLinks(self.tag, param)
        return fpaths
 
-class TakeOver(ParseHTML, Downloader):
+class TakeOver(ParseHTML):
     def __init__(self, url, tag=None, download=False, stats=False):
         super().__init__(url, tag)#ParseHTML
         self.tag = tag

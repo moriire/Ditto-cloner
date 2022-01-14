@@ -147,7 +147,7 @@ def clone(ctx, gui, url, loc):
         raise Exception('bad')
     """
     x=Crawl(url)
-    click.echo(asyncio.run(x.run()))
+    click.echo(asyncio.run(x.main()))
 
 
 @cli.command()

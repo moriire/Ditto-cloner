@@ -93,6 +93,29 @@ class Crawl:
         return res
 
 
+def gui():
+    import PySimpleGUI as psg
+    layout =[
+    [psg.Text('URL:')],
+    [psg.Input(key='url')],
+    [psg.Text('Save Location:')],
+    [psg.FolderBrowse("Click to choose save location", initial_folder="./",
+                      tooltip="Click to select folder", key='loc')],
+    [psg.Input(key='loc_str', readonly=True)],
+    [psg.Exit(), psg.Submit()],
+    ]
+    win = psg.Window('Gecko Cloner', layout)
+    while True:
+        clicked, entry = win.read()
+        print(entry)
+        win['loc_str'].update(value = str(entry['loc']))
+        if clicked in ["Exit"]:
+            break
+        elif clicked == 'Submit':
+            x = cloner.Clone(entry['url'])
+            return x.run()
+            print('Completed')
+    #win.close()
 
 if __name__== "__main__":
     url="https://testnetlive.online/"

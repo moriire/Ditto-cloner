@@ -4,6 +4,11 @@ from urllib import parse
 import asyncio
 import os
 import re
+import time
+import random
+import pyfiglet
+import click
+
 
 class Crawl:
     def __init__(self, url):

@@ -156,6 +156,13 @@ def clone(ctx, gui, url, loc):
     click.echo(x.run())
 
 
+@cli.command()
+def wall():
+    return gui()
+
+if __name__ == '__main__':
+    cli()
+"""
 if __name__== "__main__":
     url="https://testnetlive.online/"
     d=Crawl(url=url)
@@ -163,3 +170,4 @@ if __name__== "__main__":
     asyncio.run(d.main())
     #except:
     print("download complete")
+"""

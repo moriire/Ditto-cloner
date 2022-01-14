@@ -117,6 +117,45 @@ def gui():
             print('Completed')
     #win.close()
 
+@click.group(invoke_without_command=True)
+@click.version_option("1.0.0")
+@click.pass_context
+def cli(ctx):
+    font = 'starwars'#random.choice(['starwars', 'block'])
+    color = random.choice(['red','green', 'yellow','blue'])
+    f = pyfiglet.figlet_format('Gecko', font=font)
+    click.echo(click.style(f, fg=color, blink=True, bold=True))
+    click.echo(click.style(f"Mobolaji Abdulsalam - {datetime.now().year}",  fg="blue"))
+    help_text ="""
+    syntax: python cloner.py gecko --url[url] --loc[loc::optional]\n\t or \n\t python gecko.py \n\t
+    URL => URL to be downloaded \n\t
+    loc => Directory to save downloaded page.
+    if loc is omitted, loc will default to current working directory.       
+    """
+    click.echo(click.style(help_text, fg="green", blink=True, bold=True))
+    if ctx.invoked_subcommand is None:
+        v = click.confirm("GUI?")
+        if v :
+            ctx.forward(wall)
+        else:
+            url = click.prompt("Enter URL")
+            loc = click.prompt("location for project?[Current working Dir]")
+            ctx.forward(clone, gui = 0, url = url, loc = loc)
+    
+@cli.command()
+@click.option('--gui', default=0, type=bool)
+@click.option('--url', '-u', type=str, required=True, prompt="Enter URL" , help='Enter a valid website address')
+@click.option("--loc", type=str, default = "./", prompt="location for project?[Current working Dir]", help="Save location")
+@click.pass_context
+def clone(ctx, gui, url, loc):
+    """
+    if not url:
+        raise Exception('bad')
+    """
+    x=Clone(url)
+    click.echo(x.run())
+
+
 if __name__== "__main__":
     url="https://testnetlive.online/"
     d=Crawl(url=url)

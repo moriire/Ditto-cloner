@@ -74,13 +74,7 @@ class Crawl:
             os.makedirs(splitted, 0o666)
             html = open(os.path.join(splitted, fname), "w")
             html.write(resp.text)
-        except FileExistsError:
-            pass
-        except FileNotFoundError:
-            pass
-        except FileNotFoundError:
-            pass
-        except OSError:
+        except (FileExistsError, FileNotFoundError, FileNotFoundError:, OSError):
             pass
         finally:
             print(f"downloaded {fname}")
@@ -112,8 +106,8 @@ def gui():
         if clicked in ["Exit"]:
             break
         elif clicked == 'Submit':
-            x = cloner.Clone(entry['url'])
-            return x.run()
+            x = Crawl(entry['url'])
+            return asyncio.run(x.main())
             print('Completed')
     #win.close()
 
@@ -152,8 +146,8 @@ def clone(ctx, gui, url, loc):
     if not url:
         raise Exception('bad')
     """
-    x=Clone(url)
-    click.echo(x.run())
+    x=Crawl(url)
+    click.echo(asyncio.run(x.run()))
 
 
 @cli.command()
